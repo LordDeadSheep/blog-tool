@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt</title> <!-- TODO: Change to something more informational -->
+
+    <link rel="stylesheet" href="index.css">
+
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <nav>
+        <a id="home" href="">Startseite</a>
+        <div id="texte-dropdown" class="dropdown">
+            <a>Texte</a>
+            <div class="dropdown-content" id="post-links"></div>
+        </div>
+    </nav>
+
+    <template id="post-template">
+        <div class="post">
+            <h4 class="subtitle"></h4>
+            <h1 class="title"></h1>
+            <h4 class="author"></h4>
+        </div>
+    </template>
+    <section id="texts"></section>
+</body>
+</html>
