@@ -4,28 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projekt</title> <!-- TODO: Change to something more informational -->
+    <title>BlogTool</title>
 
-    <link rel="stylesheet" href="index.css">
-
-    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="css/index.css">
+    
+    <script src="js/lang.js" defer></script>
+    <script src="js/post.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
+<body x-data="posts, Translations.INSTANCE">
     <nav>
-        <a id="home" href="">Startseite</a>
-        <div id="texte-dropdown" class="dropdown">
-            <a>Texte</a>
-            <div class="dropdown-content" id="post-links"></div>
+        <a class="link home" href="" x-text="Translations.get('home')"></a>
+        <div class="dropdown" x-data="{ open: false }">
+            <a class="link" @click="open = !open" x-text="Translations.get('dropdown')"></a>
+
+            <div class="dropdown-content" x-show="open" @click.outside="open = false">
+                <template x-for="(post, index) in posts">
+                    
+                    <a x-bind:href="'#' + index" @click="post.open = true">
+                        <div class="dropbtn" :class="post.open ? 'selected' : ''" @click.outside="post.open = false">
+                            <b x-text="post.title"></b>
+                            <p class="preview-text" x-text="post.preview"></p>
+                        </div>
+                    </a>
+                </template>
+            </div>
         </div>
     </nav>
 
-    <template id="post-template">
-        <div class="post">
-            <h4 class="subtitle"></h4>
-            <h1 class="title"></h1>
-            <h4 class="author"></h4>
+    <template x-for="(post, index) in posts">
+        <section :id="index" class="post">
+            <h4 class="subtitle" x-text="post.subtitle"></h4>
+            <h1 class="title" x-text="post.title"></h1>
+            <h4 class="author" x-text="post.author + (post.date ? Translations.get('post.date').replace('<date>', post.date) : '')"></h4>
+            <template x-for="paragraph in post.paragraphs">
+                <p class="paragraph" x-html="paragraph ? paragraph : '<br/>'"></p>
+            </template>
         </div>
-    </template>
-    <section id="texts"></section>
+    </section>
 </body>
 </html>

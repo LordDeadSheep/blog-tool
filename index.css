@@ -9,6 +9,11 @@ body {
 }
 
 .post {
+    display: none;
+}
+
+.post:target {
+    display: block;
     margin: 1em;
     margin-bottom: 5em;
 }
@@ -40,7 +45,7 @@ nav {
     color: #fff;
 }
 
-nav a {
+nav .link {
     font-size: large;
     text-decoration: none;
     color: #fff;
@@ -49,23 +54,20 @@ nav a {
     cursor: pointer;
 }
 
-nav a:hover {
+nav .link:hover {
     background-color: #444;
 }
 
-nav #home {
-    display: inline;
-}
-
-nav #texte-dropdown {
-    position: absolute;
-    right: 0;
+nav .home {
+    display: inline-block;
 }
 
 
 .dropdown {
-    position: relative;
+    position: absolute;
+    right: 0;
     display: inline-block;
+    padding: 0 2em;
 }
 
 .dropdown-content {
@@ -76,6 +78,10 @@ nav #texte-dropdown {
     min-width: fit-content;
     box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
+}
+
+.dropdown-content a {
+    text-decoration: none;
 }
 
 .dropdown:hover .dropdown-content {
@@ -100,7 +106,9 @@ nav #texte-dropdown {
 }
 
 .preview-text {
+    color: #000;
     margin-top: 0;
+    margin-bottom: 0;
     font-weight: normal;
 }
 
@@ -108,6 +116,7 @@ nav #texte-dropdown {
 @media screen and (min-width: 768px) {
     .post {
         margin: 2em;
+        margin-bottom: 5em;
         max-width: 70%;
     }
 
@@ -115,12 +124,16 @@ nav #texte-dropdown {
         margin-left: 1em;
     }
 
-    nav a {
+    nav .link {
         padding: 0 4em;
     }
 
-    nav #home {
+    nav .home {
         padding: 0 2em;
+    }
+
+    .dropdown {
+        padding: 0;
     }
 
     .dropdown-content {
